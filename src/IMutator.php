@@ -8,7 +8,7 @@ interface IMutator extends IParser {
 	/**
 	 * @return string|null if no mutations happened
 	 */
-	public function getMutatedText(): ?string;
+	public function getMutatedData(): ?string;
 
 	/**
 	 * @param User|null $user Actor
