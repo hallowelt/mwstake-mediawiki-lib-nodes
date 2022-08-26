@@ -83,7 +83,7 @@ abstract class MutableParser implements IMutator {
 			return $rev;
 		}
 
-		return false;
+		return null;
 	}
 
 	/**
