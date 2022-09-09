@@ -2,11 +2,9 @@
 
 namespace MWStake\MediaWiki\Lib\Nodes;
 
-use MediaWiki\Revision\RevisionRecord;
-
 interface IParser {
 	/**
-	 * @return RevisionRecord
+	 * @return INode[]
 	 */
-	public function getRevision(): RevisionRecord;
+	public function parse(): array;
 }

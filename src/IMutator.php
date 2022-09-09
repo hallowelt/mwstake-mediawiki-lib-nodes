@@ -3,6 +3,7 @@
 namespace MWStake\MediaWiki\Lib\Nodes;
 
 use MediaWiki\Revision\RevisionRecord;
+use User;
 
 interface IMutator extends IParser {
 	/**
@@ -17,6 +18,11 @@ interface IMutator extends IParser {
 	 * @return RevisionRecord|null
 	 */
 	public function saveRevision( $user = null, $comment = '', $flags = 0 ): ?RevisionRecord;
+
+	/**
+	 * @return RevisionRecord
+	 */
+	public function getRevision() : RevisionRecord;
 
 	/**
 	 * @param INode $node

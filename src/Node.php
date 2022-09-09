@@ -2,8 +2,6 @@
 
 namespace MWStake\MediaWiki\Lib\Nodes;
 
-use MWStake\MediaWiki\Lib\Nodes\INode;
-
 abstract class Node implements INode {
 	/** @var mixed */
 	private $originalData;

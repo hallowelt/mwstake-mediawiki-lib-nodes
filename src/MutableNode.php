@@ -2,8 +2,6 @@
 
 namespace MWStake\MediaWiki\Lib\Nodes;
 
-use MWStake\MediaWiki\Lib\Nodes\IMutableNode;
-
 abstract class MutableNode extends Node implements IMutableNode {
 	/** @var mixed */
 	private $mutatedData;

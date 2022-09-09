@@ -5,17 +5,11 @@ namespace MWStake\MediaWiki\Lib\Nodes;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Storage\RevisionRecord;
 use MediaWiki\Storage\SlotRecord;
-use MWStake\MediaWiki\Lib\Nodes\IMutableNode;
-use MWStake\MediaWiki\Lib\Nodes\IMutator;
-use MWStake\MediaWiki\Lib\Nodes\INode;
-use MWStake\MediaWiki\Lib\Nodes\INodeProcessor;
 use User;
 
 abstract class MutableParser implements IMutator {
 	/** @var RevisionRecord */
 	protected $revision;
-	/** @var INodeProcessor[] */
-	private $nodeProcessors;
 	/** @var mixed */
 	protected $rawData = '';
 	/** @var bool */
