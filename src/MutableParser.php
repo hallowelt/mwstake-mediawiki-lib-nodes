@@ -3,7 +3,7 @@
 namespace MWStake\MediaWiki\Lib\Nodes;
 
 use MediaWiki\Revision\MutableRevisionRecord;
-use MediaWiki\Storage\RevisionRecord;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Storage\SlotRecord;
 use User;
 
