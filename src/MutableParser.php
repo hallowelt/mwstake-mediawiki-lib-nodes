@@ -2,6 +2,7 @@
 
 namespace MWStake\MediaWiki\Lib\Nodes;
 
+use Content;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
@@ -69,7 +70,7 @@ abstract class MutableParser implements IMutator {
 			$user = \User::newSystemUser( 'Mediawiki default' );
 		}
 		$updater = $wikipage->newPageUpdater( $user );
-		$updater->setContent( SlotRecord::MAIN, $this->revision->getContent( SlotRecord::MAIN ) );
+		$updater->setContent( SlotRecord::MAIN, $this->getContent() );
 		$rev = $updater->saveRevision( \CommentStoreComment::newUnsavedComment( $comment ), $flags );
 		if ( $rev ) {
 			$this->mutated = false;
@@ -78,6 +79,13 @@ abstract class MutableParser implements IMutator {
 		}
 
 		return null;
+	}
+
+	/**
+	 * @return Content
+	 */
+	public function getContent(): Content {
+		return  $this->revision->getContent( SlotRecord::MAIN );
 	}
 
 	/**
