@@ -122,7 +122,7 @@ abstract class MutableParser implements IMutator {
 	protected function setRevisionContent() {
 		$content = $this->getContentObject();
 		if ( !( $this->revision instanceof MutableRevisionRecord ) ) {
-			$this->revision = new MutableRevisionRecord( $this->revision->getPageAsLinkTarget() );
+			$this->revision = new MutableRevisionRecord( $this->revision->getPage() );
 		}
 		$this->revision->setSlot( SlotRecord::newUnsaved(
 			SlotRecord::MAIN,
