@@ -85,7 +85,7 @@ abstract class MutableParser implements IMutator {
 	 * @return Content
 	 */
 	public function getContent(): Content {
-		return  $this->revision->getContent( SlotRecord::MAIN );
+		return $this->revision->getContent( SlotRecord::MAIN );
 	}
 
 	/**

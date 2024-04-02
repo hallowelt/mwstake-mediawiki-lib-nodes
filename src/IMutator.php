@@ -22,7 +22,7 @@ interface IMutator extends IParser {
 	/**
 	 * @return RevisionRecord
 	 */
-	public function getRevision() : RevisionRecord;
+	public function getRevision(): RevisionRecord;
 
 	/**
 	 * @param INode $node
