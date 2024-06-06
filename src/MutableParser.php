@@ -6,6 +6,7 @@ use Content;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Storage\PageUpdater;
 use User;
 
 abstract class MutableParser implements IMutator {
@@ -70,7 +71,7 @@ abstract class MutableParser implements IMutator {
 			$user = \User::newSystemUser( 'Mediawiki default' );
 		}
 		$updater = $wikipage->newPageUpdater( $user );
-		$updater->setContent( SlotRecord::MAIN, $this->getContent() );
+		$this->setUpdaterSlotsOnSave( $updater );
 		$rev = $updater->saveRevision( \CommentStoreComment::newUnsavedComment( $comment ), $flags );
 		if ( !$rev && $this->isNullEdit( $updater->getStatus() ) ) {
 			// Do not fail on null edits
@@ -83,6 +84,14 @@ abstract class MutableParser implements IMutator {
 		}
 
 		return null;
+	}
+
+	/**
+	 * @param PageUpdater $updater
+	 * @return void
+	 */
+	protected function setUpdaterSlotsOnSave( PageUpdater $updater ) {
+		$updater->setContent( SlotRecord::MAIN, $this->getContent() );
 	}
 
 	/**
@@ -137,7 +146,7 @@ abstract class MutableParser implements IMutator {
 	 * @param \Status $saveStatus
 	 * @return bool
 	 */
-	private function isNullEdit( \Status $saveStatus ): bool {
+	protected function isNullEdit( \Status $saveStatus ): bool {
 		$errors = $saveStatus->getErrors();
 		return count( $errors ) === 1 && $errors[0]['message'] === 'edit-no-change';
 	}
