@@ -72,6 +72,10 @@ abstract class MutableParser implements IMutator {
 		$updater = $wikipage->newPageUpdater( $user );
 		$updater->setContent( SlotRecord::MAIN, $this->getContent() );
 		$rev = $updater->saveRevision( \CommentStoreComment::newUnsavedComment( $comment ), $flags );
+		if ( !$rev && $this->isNullEdit( $updater->getStatus() ) ) {
+			// Do not fail on null edits
+			$rev = $this->revision;
+		}
 		if ( $rev ) {
 			$this->mutated = false;
 			$this->revision = $rev;
@@ -85,7 +89,7 @@ abstract class MutableParser implements IMutator {
 	 * @return Content
 	 */
 	public function getContent(): Content {
-		return $this->revision->getContent( SlotRecord::MAIN );
+		return  $this->revision->getContent( SlotRecord::MAIN );
 	}
 
 	/**
@@ -127,5 +131,14 @@ abstract class MutableParser implements IMutator {
 			$content
 		) );
 		$this->mutated = true;
+	}
+
+	/**
+	 * @param \Status $saveStatus
+	 * @return bool
+	 */
+	private function isNullEdit( \Status $saveStatus ): bool {
+		$errors = $saveStatus->getErrors();
+		return count( $errors ) === 1 && $errors[0]['message'] === 'edit-no-change';
 	}
 }
