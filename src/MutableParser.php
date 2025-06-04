@@ -2,6 +2,7 @@
 
 namespace MWStake\MediaWiki\Lib\Nodes;
 
+use InvalidArgumentException;
 use MediaWiki\CommentStore\CommentStoreComment;
 use MediaWiki\Content\Content;
 use MediaWiki\MediaWikiServices;
@@ -11,6 +12,7 @@ use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Status\Status;
 use MediaWiki\Storage\PageUpdater;
 use MediaWiki\User\User;
+use RuntimeException;
 
 abstract class MutableParser implements IMutator {
 	/** @var RevisionRecord */
@@ -59,7 +61,7 @@ abstract class MutableParser implements IMutator {
 	 * @param string $comment
 	 * @param int $flags
 	 * @return RevisionRecord|null
-	 * @throws \MWException
+	 * @throws RuntimeException
 	 */
 	public function saveRevision(
 		$user = null, $comment = '', $flags = 0
@@ -132,7 +134,7 @@ abstract class MutableParser implements IMutator {
 	}
 
 	/**
-	 * @throws \MWException
+	 * @throws InvalidArgumentException
 	 */
 	protected function setRevisionContent() {
 		$content = $this->getContentObject();
