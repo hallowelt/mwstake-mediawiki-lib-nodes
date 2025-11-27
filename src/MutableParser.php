@@ -59,7 +59,6 @@ abstract class MutableParser implements IMutator {
 	 * @param string $comment
 	 * @param int $flags
 	 * @return RevisionRecord|null
-	 * @throws \MWException
 	 */
 	public function saveRevision(
 		$user = null, $comment = '', $flags = 0
@@ -131,9 +130,6 @@ abstract class MutableParser implements IMutator {
 		return $this->mutated;
 	}
 
-	/**
-	 * @throws \MWException
-	 */
 	protected function setRevisionContent() {
 		$content = $this->getContentObject();
 		if ( !( $this->revision instanceof MutableRevisionRecord ) ) {
