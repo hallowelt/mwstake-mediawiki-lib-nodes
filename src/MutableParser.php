@@ -71,7 +71,7 @@ abstract class MutableParser implements IMutator {
 			->newFromTitle( $title );
 
 		if ( !$user ) {
-			$user = User::newSystemUser( 'Mediawiki default' );
+			$user = User::newSystemUser( User::MAINTENANCE_SCRIPT_USER, [ 'steal' => true ] );
 		}
 		$updater = $wikipage->newPageUpdater( $user );
 		$this->setUpdaterSlotsOnSave( $updater );
